@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  staff: one
+  assessment_type: one
+  form: one
+  term: one
+  score: 9.99
+
+two:
+  student: two
+  staff: two
+  assessment_type: two
+  form: two
+  term: two
+  score: 9.99

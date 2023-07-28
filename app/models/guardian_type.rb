@@ -1,0 +1,2 @@
+class GuardianType < ApplicationRecord
+end

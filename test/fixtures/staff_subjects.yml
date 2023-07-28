@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  staff: one
+  subject: one
+  term: one
+  form: one
+
+two:
+  staff: two
+  subject: two
+  term: two
+  form: two

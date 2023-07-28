@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  term_number: MyString
+  academic_year: one
+  start_date: 2023-07-28
+  e: 2023-07-28
+
+two:
+  term_number: MyString
+  academic_year: two
+  start_date: 2023-07-28
+  e: 2023-07-28
