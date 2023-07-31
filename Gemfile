@@ -73,3 +73,4 @@ end
 
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'bootstrap', '~> 5.2', '>= 5.2.3'
+gem 'bcrypt'

@@ -1,0 +1,39 @@
+<h2>Sign up</h2>
+
+
+<div class="container"  >
+  <%= form_with model: @staff do |form| %>
+    <div class="row">
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Username:" %>
+          <%= form.text_field :username ,:class => "form-control form-control-sm", :required => true %>
+        </div>
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "First Name:" %>
+          <%= form.text_field :first_name ,:class => "form-control form-control-sm", :required => true %>
+        </div>
+        <div class="col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Last Name:",:class => "px-3" %>
+          <%= form.text_field :surname,:class => "form-control form-control-sm " %>
+        </div>
+    </div>
+    <div class="row">
+      <div class=" col-sm-3 mb-3 mt-3">
+        <%= form.label :query, "Date of Birth:" %>
+        <%= form.text_field :date_of_birth , type: "date", class: "form-control form-control-sm", required: true %>
+      </div>
+      <div class=" col-sm-3 mb-3 mt-3">
+        <%= form.label :query, "gender:" %>
+        <%= form.text_field :gender ,:class => "form-control form-control-sm", :required => true %>
+      </div>
+      <div class="col-sm-3 mb-3 mt-3">
+        <%= form.label :query, "Marital status:",:class => "px-3" %>
+        <%= form.text_field :password,:class => "form-control form-control-sm " %>
+      </div>
+
+    </div>
+     <div class="actions">
+        <%= form.submit "Add staff" %>
+      </div>
+  <% end %>
+</div>

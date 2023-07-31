@@ -242,6 +242,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt
   bootsnap
   bootstrap (~> 5.2, >= 5.2.3)
   capybara

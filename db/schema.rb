@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_161455) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_31_165003) do
   create_table "academic_years", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -76,6 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_161455) do
   end
 
   create_table "staffs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title"
     t.string "username", default: "", null: false
     t.string "email", default: ""
     t.string "encrypted_password", default: "", null: false
@@ -88,10 +89,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_161455) do
     t.date "date_of_birth"
     t.date "date_of_appointment"
     t.string "phone_number"
-    t.boolean "is_admin"
+    t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_staffs_on_email", unique: true
+    t.string "gender"
+    t.string "marital_status"
     t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
     t.index ["username"], name: "index_staffs_on_username", unique: true
   end

@@ -3,4 +3,9 @@ class Staff < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def email_required?
+    false
+  end
+
 end
