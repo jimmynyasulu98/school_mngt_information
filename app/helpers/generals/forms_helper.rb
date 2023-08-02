@@ -1,0 +1,2 @@
+module Generals::FormsHelper
+end

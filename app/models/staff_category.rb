@@ -1,0 +1,2 @@
+class StaffCategory < ApplicationRecord
+end

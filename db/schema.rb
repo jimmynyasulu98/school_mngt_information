@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_31_165003) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_01_131510) do
   create_table "academic_years", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -47,6 +47,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_31_165003) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "grades", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "grade"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "guardian_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -60,6 +66,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_31_165003) do
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "staff_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "staff_salaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "staff_id", null: false
+    t.bigint "grade_id", null: false
+    t.decimal "amount", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["grade_id"], name: "index_staff_salaries_on_grade_id"
+    t.index ["staff_id"], name: "index_staff_salaries_on_staff_id"
   end
 
   create_table "staff_subjects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -94,7 +116,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_31_165003) do
     t.datetime "updated_at", null: false
     t.string "gender"
     t.string "marital_status"
+    t.bigint "staff_category_id", null: false
     t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
+    t.index ["staff_category_id"], name: "index_staffs_on_staff_category_id"
     t.index ["username"], name: "index_staffs_on_username", unique: true
   end
 
@@ -174,6 +198,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_31_165003) do
   add_foreign_key "assessments", "staffs"
   add_foreign_key "assessments", "students"
   add_foreign_key "assessments", "terms"
+  add_foreign_key "staff_salaries", "grades"
+  add_foreign_key "staff_salaries", "staffs"
   add_foreign_key "staff_subjects", "forms"
   add_foreign_key "staff_subjects", "staffs"
   add_foreign_key "staff_subjects", "subjects"

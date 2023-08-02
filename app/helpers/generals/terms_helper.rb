@@ -1,0 +1,2 @@
+module Generals::TermsHelper
+end
