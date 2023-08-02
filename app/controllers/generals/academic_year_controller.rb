@@ -8,7 +8,8 @@ class Generals::AcademicYearController < ApplicationController
     @academic_year = AcademicYear.new(academic_year_params)
 
     if @academic_year.valid?
-        redirect_to root_path, notice: 'Successfully added acadamic calender'
+      @academic_year.save
+      redirect_to root_path, notice: 'Successfully added acadamic calender'
     else
       flash[:alert] = @academic_year.errors.objects.first.full_message
       render :new

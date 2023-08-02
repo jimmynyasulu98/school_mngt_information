@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_01_131510) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_02_175910) do
   create_table "academic_years", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -158,6 +158,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_131510) do
   end
 
   create_table "students", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title"
     t.string "username", default: "", null: false
     t.string "email", default: ""
     t.string "encrypted_password", default: "", null: false
@@ -171,6 +172,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_131510) do
     t.date "date_of_enrollment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "gender"
+    t.string "phone_number"
+    t.string "district"
+    t.string "TA"
+    t.string "village"
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
     t.index ["username"], name: "index_students_on_username", unique: true
@@ -184,10 +190,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_131510) do
   end
 
   create_table "terms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "term_number"
+    t.integer "term_number"
     t.bigint "academic_year_id", null: false
     t.date "start_date"
-    t.date "e"
+    t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["academic_year_id"], name: "index_terms_on_academic_year_id"

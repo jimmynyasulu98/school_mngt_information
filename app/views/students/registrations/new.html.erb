@@ -1,0 +1,60 @@
+
+<div class="container"  >
+  <%= form_with model: @student do |form| %>
+    <div class="row">
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Username:" %>
+          <%= form.text_field :username ,class: "form-control form-control-sm", :required => true %>
+        </div>
+
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Title:" %>
+          <%= form.select :title, options_for_select(['Mr','Miss', 'Mrs' ]),
+          {prompt:'--select title--', selected: @selected }, class: "form-control form-control-sm",required:true %>
+        </div>
+
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "First Name:" %>
+          <%= form.text_field :first_name ,class: "form-control form-control-sm", :required => true %>
+        </div>
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Middle Name:" %>
+          <%= form.text_field :middle_name ,class: "form-control form-control-sm" %>
+        </div>
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Last Name:" %>
+          <%= form.text_field :surname ,class: "form-control form-control-sm", :required => true %>
+        </div>
+
+        <div class="col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Gender:" %>
+          <%= form.select :gender, options_for_select(['Male', 'Female']),
+          {prompt:'--select gender--', selected: @selected }, class: "form-control form-control-sm",required:true %>
+        </div>
+
+    </div>
+    <div class="row">
+      <div class=" col-sm-3 mb-3 mt-3">
+        <%= form.label :query, "Email:" %>
+        <%= form.text_field :email , class: "form-control form-control-sm" %>
+      </div>
+      <div class=" col-sm-3 mb-3 mt-3">
+        <%= form.label :query, "Phone number:" %>
+        <%= form.text_field :phone_number, class: "form-control form-control-sm" %>
+      </div>
+      <div class=" col-sm-3 mb-3 mt-3">
+        <%= form.label :query, "Date of Birth:" %>
+        <%= form.date_field :date_of_birth , class: "form-control form-control-sm", required: true %>
+      </div>
+
+       <div class="col-sm-3 mb-3 mt-3">
+        <%= form.label :query, "Date of Enrollment:", class: "px-3" %>
+        <%= form.date_field :date_of_enrollment, class: "form-control form-control-sm " %>
+      </div>
+
+    </div>
+     <div class="actions">
+        <%= form.submit "Register Student" %>
+      </div>
+  <% end %>
+</div>
