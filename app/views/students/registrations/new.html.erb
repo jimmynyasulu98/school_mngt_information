@@ -47,9 +47,23 @@
         <%= form.date_field :date_of_birth , class: "form-control form-control-sm", required: true %>
       </div>
 
-       <div class="col-sm-3 mb-3 mt-3">
+      <div class="col-sm-3 mb-3 mt-3">
         <%= form.label :query, "Date of Enrollment:", class: "px-3" %>
         <%= form.date_field :date_of_enrollment, class: "form-control form-control-sm " %>
+      </div>
+
+       <div class="col-sm-3 mb-3 mt-3">
+        <%= form.label :query, "District:", class: "px-3" %>
+        <%= form.date_field :district, class: "form-control form-control-sm " %>
+      </div>
+
+      <div class="col-sm-3 mb-3 mt-3">
+        <%= form.label :query, "TA:", class: "px-3" %>
+        <%= form.date_field :TA, class: "form-control form-control-sm " %>
+      </div>
+      <div class="col-sm-3 mb-3 mt-3">
+        <%= form.label :query, "Village:", class: "px-3" %>
+        <%= form.date_field :village, class: "form-control form-control-sm " %>
       </div>
 
     </div>

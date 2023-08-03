@@ -4,6 +4,10 @@ class Staff < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+
+  has_many :subjects, through: :staff_subjects
+  has_many :assessments
+
   def email_required?
     false
   end
