@@ -1,0 +1,47 @@
+<%= render "shared/navbar" %>
+
+<p>Add Guardian for Student</p>
+
+<div class="container"  >
+  <%= form_with model: @guardian , url: student_guardians_path do |form| %>
+    <div class="row">
+
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Title:" %>
+          <%= form.select :title, options_for_select(['Mr','Miss', 'Mrs' ,"Dr" , "Prof" ]),
+          {prompt:'--select title--', selected: @selected }, class: "form-control form-control-sm",required:true %>
+        </div>
+
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "First Name:" %>
+          <%= form.text_field :first_name ,class: "form-control form-control-sm", :required => true %>
+        </div>
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Middle Name:" %>
+          <%= form.text_field :middle_name ,class: "form-control form-control-sm" %>
+        </div>
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Last Name:" %>
+          <%= form.text_field :surname ,class: "form-control form-control-sm", :required => true %>
+        </div>
+
+
+
+         <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Date of Birth:" %>
+          <%= form.date_field :date_of_birth ,class: "form-control form-control-sm", :required => true %>
+        </div>
+        <div class=" col-sm-3 mb-3 mt-3">
+          <%= form.label :query, "Phone Number:" %>
+          <%= form.text_field :phone_number ,class: "form-control form-control-sm", :required => true %>
+        </div>
+
+    </div>
+    <div class="row">
+
+    </div>
+     <div class="actions">
+        <%= form.submit "Add guardian" %>
+    </div>
+  <% end %>
+</div>

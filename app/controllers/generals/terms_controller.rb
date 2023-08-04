@@ -1,6 +1,7 @@
 class Generals::TermsController < ApplicationController
   def new
     @term = Term.new
+    @acadamic_year = AcademicYear.last
   end
 
   def create

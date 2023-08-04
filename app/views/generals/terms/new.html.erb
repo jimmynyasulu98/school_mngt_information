@@ -3,7 +3,9 @@
 <%= form_with model: @term  do |form| %>
   <div class= "container d-flex">
     <%= form.text_field :term_number %>
-     <%= form.collection_select :academic_year_id, AcademicYear.all, :id, :name %>
+    <%= form.label :query, "Acadamic year " + @acadamic_year.name %>
+    <%= form.hidden_field :academic_year_id, value: @acadamic_year.id %>
+
     <%= form.date_field :start_date %>
     <%= form.date_field :end_date%>
 

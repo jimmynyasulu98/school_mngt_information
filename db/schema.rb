@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_02_175910) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_04_135538) do
   create_table "academic_years", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -66,6 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_175910) do
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "surname"
+    t.string "gender"
   end
 
   create_table "staff_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -134,14 +136,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_175910) do
   end
 
   create_table "student_guardians", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "Student_id", null: false
-    t.bigint "Guardian_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "guardian_id", null: false
+    t.bigint "guardian_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "guardian_type_id", null: false
-    t.index ["Guardian_id"], name: "index_student_guardians_on_Guardian_id"
-    t.index ["Student_id"], name: "index_student_guardians_on_Student_id"
+    t.index ["guardian_id"], name: "index_student_guardians_on_guardian_id"
     t.index ["guardian_type_id"], name: "index_student_guardians_on_guardian_type_id"
+    t.index ["student_id"], name: "index_student_guardians_on_student_id"
   end
 
   create_table "student_subjects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -214,8 +216,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_175910) do
   add_foreign_key "student_forms", "forms"
   add_foreign_key "student_forms", "students"
   add_foreign_key "student_guardians", "guardian_types"
-  add_foreign_key "student_guardians", "guardians", column: "Guardian_id"
-  add_foreign_key "student_guardians", "students", column: "Student_id"
+  add_foreign_key "student_guardians", "guardians"
+  add_foreign_key "student_guardians", "students"
   add_foreign_key "student_subjects", "forms"
   add_foreign_key "student_subjects", "students"
   add_foreign_key "student_subjects", "subjects"

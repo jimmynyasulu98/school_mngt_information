@@ -1,5 +1,5 @@
 class StudentGuardian < ApplicationRecord
-  belongs_to :Student
-  belongs_to :Guardian
-  belongs_to :GuardianType
+  belongs_to :student
+  belongs_to :guardian
+  belongs_to :guardian_type
 end

@@ -10,8 +10,9 @@ class Students::RegistrationsController < ApplicationController
     @student.password = 123456789.to_s
 
     if @student.save
+        params[:student_id] = @student.id
 
-        redirect_to root_path, notice: 'Successfully Registered student Member'
+        redirect_to new_student_guardian_path(@student.id), notice: 'Successfully Registered student Member'
     else
         render :new
     end
