@@ -1,0 +1,25 @@
+
+<div class="modal fade" id="addParentTypeModal" tabindex="-1" aria-labelledby="addParentTypeModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Guardian Type</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_with  url: guardian_type_path do |form| %>
+        <div class="modal-body">
+          <%= form.label :query, "Guardian Type:" %>
+          <%= form.text_field :guardian_type ,class: "form-control form-control-sm", :required => true %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+           <%= form.submit "Add guardian", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+

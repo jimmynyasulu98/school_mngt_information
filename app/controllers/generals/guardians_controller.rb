@@ -9,7 +9,7 @@ class Generals::GuardiansController < ApplicationController
 
     if @guardian.valid?
       @guardian.save
-      StudentGuardian.create(student_id: params[:student_id], guardian_id: 1 , guardian_type_id: 1)
+      StudentGuardian.create(student_id: params[:student_id], guardian_id: @guardian.id , guardian_type_id: 1)
       redirect_to root_path, notice: 'Operation successful'
 
     else
@@ -17,11 +17,18 @@ class Generals::GuardiansController < ApplicationController
     end
 
   end
+
+  def guardian_type
+
+    GuardianType.create(name: params[:guardian_type])
+    redirect_back_or_to root_path , notice: 'Operation successful'
+  end
+
   private
     def user_params
     # strong parameters
-    params.require(:guardian).permit(:first_name,:middle_name, :surname, :date_of_bith,:email,:phone_number, :gender,
-      :district, :TA, :village)
+      params.require(:guardian).permit(:first_name,:middle_name, :surname, :date_of_bith,:email,:phone_number, :gender,
+        :district, :TA, :village)
     end
 
 end

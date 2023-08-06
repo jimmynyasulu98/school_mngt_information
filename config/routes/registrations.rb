@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :guardians ,only: [:new , :create , :edit],
     controller: "generals/guardians"
   end
+  post 'registrations/students/guardian/guardian-type', to: 'generals/guardians#guardian_type' ,as: "guardian_type"
 
 
 

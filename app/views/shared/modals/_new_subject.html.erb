@@ -1,0 +1,27 @@
+<div class="modal fade" id="addSubjectModal" tabindex="-1" aria-labelledby="addSubjectModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Subject</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_with  url: subject_index_path do |form| %>
+        <div class="modal-body">
+          <%= form.label :query, "Subject Name:" %>
+          <%= form.text_field :name ,class: "form-control form-control-sm", :required => true %>
+        </div>
+
+        <div class = "container d-flex">
+            <%= form.check_box :compulsory %>
+            <%= form.label :true, "Compulsory " %>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+           <%= form.submit "Add Subject", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -12,7 +12,7 @@ class Students::RegistrationsController < ApplicationController
     if @student.save
         params[:student_id] = @student.id
 
-        redirect_to new_student_guardian_path(@student.id), notice: 'Successfully Registered student Member'
+        redirect_to new_student_guardian_path(@student.id), notice: 'Successfully Registered student'
     else
         render :new
     end
@@ -21,7 +21,7 @@ class Students::RegistrationsController < ApplicationController
   private
     def user_params
     # strong parameters
-    params.require(:student).permit(:email,:email,:username, :first_name,:middle_name, :surname, :date_of_bith, :date_of_enrollment,
+    params.require(:student).permit(:email,:username, :first_name,:middle_name, :surname, :date_of_bith, :date_of_enrollment,
     :phone_number, :gender,:district, :TA, :village)
     end
 end

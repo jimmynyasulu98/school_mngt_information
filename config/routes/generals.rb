@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :terms, path: "generals/term",only: [:index, :new , :create , :edit],
      controller: "generals/terms"
   resources :form ,only: [:new , :create , :edit]
-  resources :subject ,only: [:new , :create , :edit]
+
+  resources :subject, path: "generals/subject" ,only: [:create ,:edit , :destroy],controller: "generals/subjects"
 
 end

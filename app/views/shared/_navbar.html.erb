@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -23,15 +24,17 @@
             <li> <%= link_to "New acadamic Year" , new_academic_year_path,  class: "dropdown-item" %> </li>
             <li> <%= link_to "Add form/class" , register_staff_path ,  class: "dropdown-item" %> </li>
             <li> <%= link_to "New term" , new_term_path ,  class: "dropdown-item" %> </li>
-            <li> <%= link_to "Add Guardian type" , register_staff_path ,  class: "dropdown-item" %> </li>
-            <li> <%= link_to "Add Subjects" , register_staff_path ,  class: "dropdown-item" %> </li>
+            <li> <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addParentTypeModal">
+                  Add Guardian type
+              </button></li>
+            <li> <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addSubjectModal">
+                  Add Subject
+              </button> </li>
             <li> <%= link_to "Add Subjects" , register_staff_path ,  class: "dropdown-item" %> </li>
             <li> <%= link_to "Add Subjects" , register_staff_path ,  class: "dropdown-item" %> </li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
+
       </ul>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
        <% if staff_signed_in? %>
@@ -56,3 +59,7 @@
     </div>
   </div>
 </nav>
+
+<!--  Modals -->
+<%= render "shared/modals/guardian_type" %>
+<%= render "shared/modals/new_subject" %>
