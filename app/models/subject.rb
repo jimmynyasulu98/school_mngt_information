@@ -1,4 +1,4 @@
 class Subject < ApplicationRecord
-  validates :name, presence: true , unique: true
+  validates :name, presence: true , uniqueness: { scope: :name }
 
 end

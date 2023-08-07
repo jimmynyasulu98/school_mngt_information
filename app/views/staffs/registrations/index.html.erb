@@ -1,0 +1,48 @@
+<%= render "shared/navbar" %>
+
+<div class="">
+      <%= form_with url: staff_members_path, method: :get, data: { controller: "form", action: "input->form#submit" } do |f| %>
+        <%= text_field_tag "filter", nil, placeholder: "Search with username", class: "inline-block rounded-md border border-gray-200 outline-none px-3 py-2  w-full" %>
+        <%= f.button  "Search", class: 'btn btn-success'%>
+      <% end %>
+</div>
+
+<div id="staff" class="table-responsive py-2">
+    <table class="table data-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+                <th>Assign subject</th>
+            </tr>
+        </thead>
+        <tbody>
+             <% @staff.each do |staff| %>
+                <tr>
+                    <td></td>
+                    <td><%= staff.username %></td>
+                    <td><%= staff.first_name %></td>
+                    <td><%= staff.surname %></td>
+                    <td><%= staff.date_of_birth %></td>
+                    <td><%= staff.date_of_appointment %></td>
+                    <td><%= link_to "Assign Subject", new_staff_subject_path(staff.id) %></td>
+                </tr>
+            <% end %>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+

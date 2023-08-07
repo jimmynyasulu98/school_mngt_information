@@ -1,0 +1,2 @@
+module Subjects::StudentSubjectsHelper
+end

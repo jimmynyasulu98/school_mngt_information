@@ -1,0 +1,2 @@
+module Subjects::StaffSubjectsHelper
+end

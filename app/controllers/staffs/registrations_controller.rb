@@ -1,4 +1,15 @@
 class Staffs::RegistrationsController < ApplicationController
+  before_action :authenticate_staff!
+
+  def index
+
+    if !params[:filter].blank?
+      @staff = Staff.where("username  LIKE ?", "%#{params[:filter]}%")
+    else
+      @staff = Staff.all
+    end
+
+  end
 
   def new
     @staff = Staff.new

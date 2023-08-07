@@ -1,5 +1,5 @@
-class Generals::SubjectsController < ApplicationController
-
+class Subjects::SubjectsController < ApplicationController
+  before_action :authenticate_staff!
   def create
 
     @subject = Subject.create(name: params[:name], compulsory: params[:compulsory])
