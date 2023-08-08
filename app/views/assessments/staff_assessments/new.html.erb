@@ -1,2 +1,9 @@
 <%= render 'shared/navbar' %>
 <%= "Add Assessments for term " %>
+
+<div class="container-fluid" >
+    <% @student_subjects.each do |student| %>
+        <%= student.student.username  %> <%= link_to "\t\tAdd  results", new_subject_assessment_path() %>
+
+    <% end %>
+</div>

@@ -4,7 +4,7 @@
 <div class="container-fluid" >
     <% @subjects.each do |subject| %>
         <%= subject.subject.name  %> <%= "form " +subject.form.name  %><%= "\t\tStudents enrolled"%>
-        <%= link_to "\t\tAdd assignment results", new_subject_assessment_path(subject.id) %>
+        <%= link_to "\t\tAdd assignment results", new_subject_assessment_path(subject_id:subject.subject.id , form:subject.form.id) %>
 
     <% end %>
 </div>
