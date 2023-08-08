@@ -1,0 +1,10 @@
+<%= render 'shared/navbar' %>
+<%= "Your Subjects for term " + @term.term_number.to_s + " of " + @term.academic_year.name + " Acadamic year" %>
+
+<div class="container-fluid" >
+    <% @subjects.each do |subject| %>
+        <%= subject.subject.name  %> <%= "form " +subject.form.name  %><%= "\t\tStudents enrolled"%>
+        <%= link_to "\t\tAdd assignment results", new_subject_assessment_path(subject.id) %>
+
+    <% end %>
+</div>

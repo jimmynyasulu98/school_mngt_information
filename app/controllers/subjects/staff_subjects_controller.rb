@@ -2,15 +2,22 @@ class Subjects::StaffSubjectsController < ApplicationController
   before_action :authenticate_staff!
   before_action :find_staff, only: [:new, :edit, :update, :destroy]
 
+ #staff subjects
+  def index
+    @term = Term.last
+    @subjects = StaffSubject.where("staff_id = ? AND term_id = ?", current_staff.id , @term.id)
+  end
+
+  # Template to assign subject to staff
   def new
     @staff_subject = StaffSubject.new
     @term = Term.last
-
   end
 
+ # Assign subject to staff
   def create
 
-    if StaffSubject.where("subject_id = ? AND form_id = ? AND term_id = ?", params[:subject_id],
+    if !StaffSubject.where("subject_id = ? AND form_id = ? AND term_id = ?", params[:subject_id],
       params[:form_id],params[:term_id]).nil?
 
       @staff_subject = StaffSubject.create(staff_subject_params)
@@ -21,7 +28,7 @@ class Subjects::StaffSubjectsController < ApplicationController
         render :new
       end
     else
-      redirect_back_or_to root_path,  notice: 'Subject already assigned to another staff'
+      redirect_back_or_to root_path,  alert: 'Subject already assigned to another staff'
     end
   end
 
