@@ -1,6 +1,8 @@
 class Generals::AcademicYearController < ApplicationController
+  before_action :authenticate_staff!
   def new
     @academic_year = AcademicYear.new
+    authorize  @academic_year
   end
 
   def create
@@ -20,6 +22,10 @@ class Generals::AcademicYearController < ApplicationController
   def academic_year_params
   # strong parameters
     params.require(:academic_year).permit(:name,:start_date, :end_date)
+  end
+
+  def pundit_user
+    current_staff
   end
 
 end

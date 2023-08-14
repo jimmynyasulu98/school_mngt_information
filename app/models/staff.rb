@@ -7,6 +7,7 @@ class Staff < ApplicationRecord
 
   has_many :subjects, through: :staff_subjects
   has_many :assessments
+  has_one :authorization
 
   def email_required?
     false

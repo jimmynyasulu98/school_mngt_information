@@ -1,9 +1,29 @@
 <%= render 'shared/navbar' %>
 <%= "Add Assessments for term " %>
 
-<div class="container-fluid" >
-    <% @student_subjects.each do |student| %>
-        <%= student.student.username  %> <%= link_to "\t\tAdd  results", new_subject_assessment_path() %>
+<%= button_to("New assessment", { action: "new" }, class: "btn btn-primary") %>
+ <%= form_with   do |form| %>
+    <%= form.collection_select :type, @assessment_types, :id, :name ,class: "form-control form-control-sm " %>
+ <% end%>
 
+<div class="container-fluid" >
+    <div class="col-md-5">
+    <% @assessment_types.each do |assessment_type| %>
+        <% @assessments.where(assessment_type_id:assessment_type.id).each do |assessment| %>
+
+            <%= assessment.student.username  %>
+            <% if assessment.score == nil %>
+                <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addstudentAssessmentModal<%=assessment.student.id%>">
+                    Add Score
+                </button>
+            <% else %>
+                <%= assessment.score %>
+            <% end %>
+            <%= render "shared/modals/new_assessment", assessment: assessment , assessment_type: assessment_type   %>
+
+        <% end %>
     <% end %>
+    </div>
 </div>
+
+

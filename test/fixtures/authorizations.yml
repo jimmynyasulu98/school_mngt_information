@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  staff: one
+  staff: false
+  student: false
+  guardian: false
+  academic_year: false
+  term: false
+
+two:
+  staff: two
+  staff: false
+  student: false
+  guardian: false
+  academic_year: false
+  term: false

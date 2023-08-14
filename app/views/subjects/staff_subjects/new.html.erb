@@ -7,9 +7,9 @@ Assign subject to <%= @staff.first_name %> (<%= @staff.username %>) for term <%=
   <%= form_with model: @staff_subject , url: staff_subjects_path do |form| %>
     <div class="row">
 
-        <%= form.hidden_field :staff_id , value: @staff.id, class: "form-control form-control-sm", :required => true %>
+        <%= form.hidden_field :staff_id , value: @staff.id %>
 
-        <%= form.hidden_field :term_id , value: @term.id, class: "form-control form-control-sm", :required => true %>
+        <%= form.hidden_field :term_id , value: @term.id%>
 
         <div class="col-sm-3 mb-3 mt-3">
             <%= form.label :query, "Subject",:class => "px-3" %>
