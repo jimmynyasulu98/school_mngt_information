@@ -1,0 +1,48 @@
+<%= render "shared/navbar" %>
+<div class="container"  >
+    <div class="row">
+        <div class="col d-flex">
+            <h5 class="mx-3" ><%= "Reg Number"  %></h5>
+            <p class=""> <%= @student.username %></p>
+            <% if !@student_form.nil? %>
+                <p class="mx-3"> <%= "Form/Class" %></p>
+                <p class=""> <%= @student_form.id %></p>
+            <% else %>
+                <p class="mx-3"> <%= "student not active" %></p>
+            <% end %>
+
+        </div>
+    </div>
+</div>
+<div class="tab">
+    <% if !@student_form.nil? %>
+        <button class="tablinks" onclick="openTab(event, 'academicDetails')">Add acadamic details</button>
+        <button class="tablinks" onclick="openTab(event, 'guardian')">Add Guardian</button>
+    <% end %>
+</div>
+
+<div id="academicDetails" class="tabcontent">
+  <h3>Add subjects</h3>
+  <% if Term.last.registration_open %>
+    <%= form_with url: register_subject_for_student_path do |form| %>
+        <%= form.hidden_field :student_id , value: @student.id %>
+        <div class="col-sm-3 mb-3">
+            <%= form.label :query, "Subjects:",:class => "px-3" %>
+            <%= form.collection_select :subjects, @subjects,:id, :name,{}, multiple: true,class: "form-control form-control-sm "%>
+        </div>
+
+        <%= form.submit "Register", class: "btn btn-primary" %>
+    <% end %>
+   <% else %>
+    <p>Registration closed. Contact relevant adiministrator for help</p>
+   <% end %>
+</div>
+
+<div id="guardian" class="tabcontent">
+  <h3>Guardian</h3>
+  <p>wlkam</p>
+</div>
+
+
+
+

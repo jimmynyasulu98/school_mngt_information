@@ -75,8 +75,8 @@ gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 gem 'bcrypt'
 gem 'pundit', '~> 2.3', '>= 2.3.1'
-gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+gem 'jquery-rails'
+gem 'jquery-ui-rails', '~> 6.0'
 
-gem "jquery-rails", "~> 4.6"
 gem 'jquery-datatables-rails' , github: 'rweng/jquery-datatables-rails'
 

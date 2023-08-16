@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_13_203331) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_16_092313) do
   create_table "academic_years", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_203331) do
     t.bigint "form_id", null: false
     t.bigint "term_id", null: false
     t.decimal "score", precision: 10, default: "0"
-    t.bigint "assessment_grade_id", null: false
+    t.bigint "assessment_grade_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "submitted", default: false
@@ -107,6 +107,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_203331) do
     t.datetime "updated_at", null: false
     t.string "surname"
     t.string "gender"
+  end
+
+  create_table "registrations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "term_id", null: false
+    t.bigint "form_id", null: false
+    t.boolean "registered", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form_id"], name: "index_registrations_on_form_id"
+    t.index ["student_id"], name: "index_registrations_on_student_id"
+    t.index ["term_id"], name: "index_registrations_on_term_id"
   end
 
   create_table "staff_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -204,6 +216,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_203331) do
     t.bigint "form_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "approved", default: false
     t.index ["form_id"], name: "index_student_subjects_on_form_id"
     t.index ["student_id"], name: "index_student_subjects_on_student_id"
     t.index ["subject_id"], name: "index_student_subjects_on_subject_id"
@@ -245,6 +258,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_203331) do
   create_table "terms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "term_number"
     t.bigint "academic_year_id", null: false
+    t.boolean "registration_open", default: false
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", null: false
@@ -262,6 +276,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_203331) do
   add_foreign_key "assessments", "subjects"
   add_foreign_key "assessments", "terms"
   add_foreign_key "authorizations", "staffs"
+  add_foreign_key "registrations", "forms"
+  add_foreign_key "registrations", "students"
+  add_foreign_key "registrations", "terms"
   add_foreign_key "staff_salaries", "grades"
   add_foreign_key "staff_salaries", "staffs"
   add_foreign_key "staff_subjects", "forms"

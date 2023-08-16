@@ -271,8 +271,8 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-datatables-rails!
-  jquery-rails (~> 4.6)
-  jquery-ui-rails (~> 6.0, >= 6.0.1)
+  jquery-rails
+  jquery-ui-rails (~> 6.0)
   mysql2 (~> 0.5)
   puma (~> 5.0)
   pundit (~> 2.3, >= 2.3.1)

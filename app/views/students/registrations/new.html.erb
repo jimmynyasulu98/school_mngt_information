@@ -32,6 +32,11 @@
           {prompt:'--select gender--', selected: @selected }, class: "form-control form-control-sm",required:true %>
         </div>
 
+        <div class="col-sm-3 mb-3 mt-3">
+            <%= form.label :query, "Form/Class" %>
+            <%= form.collection_select :form_id, Form.all, :id, :name ,class: "form-control form-control-sm " %>
+        </div>
+
     </div>
     <div class="row">
       <div class=" col-sm-3 mb-3 mt-3">
