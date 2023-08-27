@@ -12,8 +12,8 @@ class Students::RegistrationsController < ApplicationController
     @student.password = 123456789.to_s
 
     if @student.save
-      # Add a student in a Student class/form  table for the current acadamic year
-      StudentForm.create(student_id: @student.id, form_id: params[:form_id], academic_year_id: AcademicYear.last.id)
+      # Add a student in a Student class/form  table for the current term
+      StudentForm.create(student_id: @student.id, form_id: params[:student][:form_id], term_id: Term.last.id)
       redirect_to  student_path(@student.id), notice: 'Successfully Registered student'
       #new_student_guardian
     else
@@ -23,8 +23,12 @@ class Students::RegistrationsController < ApplicationController
   end
 
   def show
+    @term = Term.last
     @subjects = Subject.all
-    @student_form =  StudentForm.where(student_id: @student.id , academic_year_id: AcademicYear.last.id).first
+    @student_subjects = StudentSubject.where(student_id: @student.id, term_id: @term.id)
+
+    @student_form =  StudentForm.where(student_id: @student.id , term_id: @term.id).first
+
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_16_092313) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_27_181036) do
   create_table "academic_years", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_092313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "term_id", null: false
-    t.boolean "mandatory"
+    t.boolean "mandatory", default: false
     t.boolean "end_of_term", default: false
     t.boolean "grade", default: false
     t.bigint "staff_id", null: false
@@ -47,7 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_092313) do
     t.bigint "assessment_type_id", null: false
     t.bigint "form_id", null: false
     t.bigint "term_id", null: false
-    t.decimal "score", precision: 10, default: "0"
+    t.decimal "score", precision: 10
     t.bigint "assessment_grade_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -190,12 +190,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_092313) do
   create_table "student_forms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "student_id", null: false
     t.bigint "form_id", null: false
-    t.bigint "academic_year_id", null: false
+    t.bigint "term_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["academic_year_id"], name: "index_student_forms_on_academic_year_id"
     t.index ["form_id"], name: "index_student_forms_on_form_id"
     t.index ["student_id"], name: "index_student_forms_on_student_id"
+    t.index ["term_id"], name: "index_student_forms_on_term_id"
   end
 
   create_table "student_guardians", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -285,9 +285,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_092313) do
   add_foreign_key "staff_subjects", "staffs"
   add_foreign_key "staff_subjects", "subjects"
   add_foreign_key "staff_subjects", "terms"
-  add_foreign_key "student_forms", "academic_years"
   add_foreign_key "student_forms", "forms"
   add_foreign_key "student_forms", "students"
+  add_foreign_key "student_forms", "terms"
   add_foreign_key "student_guardians", "guardian_types"
   add_foreign_key "student_guardians", "guardians"
   add_foreign_key "student_guardians", "students"

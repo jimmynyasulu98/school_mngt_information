@@ -5,9 +5,10 @@ class Student < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :guardian, through: :student_guardians
-  has_one :form, through: :student_forms
+  has_many :forms, through: :student_forms
   has_many :subjects, through: :student_subjects
   has_many :assessments
+  has_many :registrations
 
   def email_required?
     false

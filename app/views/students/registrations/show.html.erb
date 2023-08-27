@@ -12,37 +12,66 @@
             <% end %>
 
         </div>
+        <div class="col d-flex">
+            <h5 class="mx-3" ><%= "Subjects"  %></h5>
+
+            <% if !@student_subjects.blank? %>
+                <% if @student.registrations.last.registered %>
+                    <p class="mx-3">You are a registered student</p>
+                <% else %>
+                    <p class="mx-3">Your subjects pending approval</p>
+                <% end %>
+                <div class = "row">
+                    <% @student_subjects.each do |subject| %>
+                        <%= subject.subject.name %>
+                    <% end %>
+                </div>
+            <% else %>
+                <p class="mx-3"> You do not have subjects registered for current term</p>
+            <% end %>
+        </div>
     </div>
 </div>
-<div class="tab">
-    <% if !@student_form.nil? %>
-        <button class="tablinks" onclick="openTab(event, 'academicDetails')">Add acadamic details</button>
-        <button class="tablinks" onclick="openTab(event, 'guardian')">Add Guardian</button>
-    <% end %>
-</div>
 
-<div id="academicDetails" class="tabcontent">
-  <h3>Add subjects</h3>
-  <% if Term.last.registration_open %>
-    <%= form_with url: register_subject_for_student_path do |form| %>
-        <%= form.hidden_field :student_id , value: @student.id %>
-        <div class="col-sm-3 mb-3">
-            <%= form.label :query, "Subjects:",:class => "px-3" %>
-            <%= form.collection_select :subjects, @subjects,:id, :name,{}, multiple: true,class: "form-control form-control-sm "%>
-        </div>
-
-        <%= form.submit "Register", class: "btn btn-primary" %>
-    <% end %>
-   <% else %>
-    <p>Registration closed. Contact relevant adiministrator for help</p>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+     <% if !@student_form.nil? %>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="subjects-tab" data-bs-toggle="tab" data-bs-target="#subjects" type="button" role="tab" aria-controls="subjects" aria-selected="true">Register Subjects</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="guardian-tab" data-bs-toggle="tab" data-bs-target="#guardian" type="button" role="tab" aria-controls="guardian" aria-selected="false">Guardian Details</button>
+        </li>
    <% end %>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="subjects" role="tabpanel" aria-labelledby="subjects-tab">
+     <% if @student_subjects.blank? %>
+            <h3>Add subjects</h3>
+            <% if Term.last.registration_open %>
+                <%= form_with url: register_subject_for_student_path do |form| %>
+                    <%= form.hidden_field :student_id , value: @student.id %>
+                    <div class="col-sm-3 mb-3">
+                        <%= form.label :query, "Subjects:",:class => "px-3" %>
+                        <%= form.collection_select :subjects, @subjects,:id, :name,{}, multiple: true,class: "form-control form-control-sm "%>
+                    </div>
+
+                    <%= form.submit "Register", class: "btn btn-primary" %>
+                <% end %>
+            <% else %>
+                <p>Registration closed. Contact the adiministrator for help</p>
+            <% end %>
+        <% else %>
+            <% if @student.registrations.last.registered %>
+                <p>Student already registered</p>
+            <% else %>
+                <p>Student already registered Subjects for this term..</p>
+            <% end %>
+    <% end %>
+  </div>
+  <div class="tab-pane fade" id="guardian" role="tabpanel" aria-labelledby="guardian-tab">
+    <h3>Guardian</h3>
+        <p>wlkam</p>
+
+  </div>
 </div>
-
-<div id="guardian" class="tabcontent">
-  <h3>Guardian</h3>
-  <p>wlkam</p>
-</div>
-
-
-
-

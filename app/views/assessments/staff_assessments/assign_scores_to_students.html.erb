@@ -1,0 +1,64 @@
+<%= render 'shared/navbar' %>
+<%= "Add Assessments for term " %>
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAssessmentModal">Add Assessment</button>
+<div class="container-fluid" >
+    <% @assessment_types.each do |assessment_type| %>
+        <div class="col-md-6">
+            <% @assessments.where(assessment_type_id:assessment_type.id).each do |assessment| %>
+
+                <%= assessment.student.username  %>
+                    <% if assessment.score.nil? %>
+                        <button type="button" class="btn btn-link"  data-bs-toggle="modal" data-bs-target="#addstudentAssessmentModal<%=assessment.student.id%>">
+                            Add Score
+                        </button>
+                    <% else %>
+                        <%= assessment.score %>
+                        <%= @assessments.find_index(assessment)+1 %>
+                    <% end %>
+                <%= render "shared/modals/new_student_score", assessment: assessment , assessment_type: assessment_type   %>
+
+            <% end %>
+        </div>
+    <% end %>
+
+</div>
+<div class="container-fluid" >
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <% @assessment_types.each do |assessment_type| %>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link " id="<%=assessment_type.name%>-tab" data-bs-toggle="tab"
+                 data-bs-target="#<%=assessment_type.name%>" type="button" role="tab" aria-controls="<%= assessment_type.name%>"
+                 aria-selected="true"><%=assessment_type.name%></button>
+            </li>
+         <% end %>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <% @assessment_types.each do |assessment_type| %>
+        <div class="tab-pane fade" id="<%=assessment_type.name%>" role="tabpanel" aria-labelledby="<%=assessment_type.name%>-tab">
+            <h3><%= "Add marks to students" %></h3>
+             <div class="col-md-12">
+            <% @assessments.where(assessment_type_id:assessment_type.id).each do |assessment| %>
+                <%= assessment.student.username  %>
+                    <% if assessment.score.nil? %>
+                        <button type="button" class="btn btn-link"  data-bs-toggle="modal" data-bs-target="#addstudentAssessmentModal<%=assessment.student.id%>">
+                            Add Score
+                        </button>
+                    <% else %>
+                        <%= assessment.score %>
+                        <%= @assessments.find_index(assessment)+1 %>
+                    <% end %>
+                <%= render "shared/modals/new_student_score", assessment: assessment , assessment_type: assessment_type %>
+
+            <% end %>
+        </div>
+        </div>
+        <%end%>
+    </div>
+</div>
+
+
+ <%= render "shared/modals/new_assessment", form_id: params[:form] %>
+
+

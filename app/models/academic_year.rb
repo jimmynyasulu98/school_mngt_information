@@ -4,6 +4,7 @@ class AcademicYear < ApplicationRecord
   validates :end_date, presence: true
 
   has_many :terms
-  has_many :students, through: :student_forms
+  has_many :students, through: :terms
+
 
 end

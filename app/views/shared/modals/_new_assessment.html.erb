@@ -1,23 +1,17 @@
-<div class="modal fade" id="addstudentAssessmentModal<%= assessment.student.id%>" tabindex="-1" aria-labelledby="addstudentAssessmentModal#{student_id}" aria-hidden="true">
+<div class="modal fade" id="newAssessmentModal" tabindex="-1" aria-labelledby="newAssessment" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><%= "Add score for "+ assessment.student.username %></h5>
+        <h5 class="modal-title" id="exampleModalLabel">Create New assessment</h5>
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+
       <%= form_with  url: subject_assessments_path do |form| %>
-
-         <%= form.hidden_field :student_id , value: assessment.student_id %>
-         <%= form.hidden_field :term, value: assessment.term_id %>
-         <%= form.hidden_field :form, value: assessment.form_id %>
-         <%= form.hidden_field :assessment_type, value: assessment_type.id %>
-         <%= form.hidden_field :staff_id, value: assessment.staff_id %>
-
-
+        <%= form.hidden_field :form, value: form_id , class: "form-control form-control-sm", :required => true %>
         <div class="modal-body">
-          <%= form.label :query, "Total Marks:" %>
-          <%= form.number_field :score ,class: "form-control form-control-sm", :required => true %>
+          <%= form.label :query, "Assessment name:" %>
+          <%= form.text_field :assessment, class: "form-control form-control-sm", :required => true %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

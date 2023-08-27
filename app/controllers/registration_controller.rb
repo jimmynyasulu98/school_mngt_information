@@ -6,7 +6,7 @@ class RegistrationController < ApplicationController
   def create
 
     @staff = Staff.new(user_params)
-    puts @staff
+
     if @staff.sav
     # stores saved user id in a session
         session[:staff_id] = @staff.id
