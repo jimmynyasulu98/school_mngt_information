@@ -1,4 +1,4 @@
-<div class="modal fade" id="addstudentAssessmentModal<%= assessment.student.id%>" tabindex="-1" aria-labelledby="addstudentAssessmentModal#{student_id}" aria-hidden="true">
+<div class="modal fade" id="addstudentAssessmentModal<%=assessment.student.id+assessment.id%>" tabindex="-1" aria-labelledby="addstudentAssessmentModal#{student_id}" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -13,9 +13,10 @@
         <%= form.hidden_field :form, value: assessment.form_id %>
         <%= form.hidden_field :assessment_type, value: assessment_type.id %>
         <%= form.hidden_field :staff_id, value: assessment.staff_id %>
-        <%= form.hidden_field :active_tab, value: assessment_type.name %>
+        <%= form.hidden_field :assessment_name, value: assessment_type.name %>
 
       <div class="modal-body">
+
           <%= form.label :query, "Total Marks:" %>
           <%= form.number_field :score ,class: "form-control form-control-sm", :required => true %>
         </div>

@@ -1,5 +1,6 @@
 class Assessments::StaffAssessmentsController < ApplicationController
   before_action :authenticate_staff!
+  before_action :find_assessment, only: [:submit_assessment, :destroy]
 
 
   def create
@@ -17,11 +18,11 @@ class Assessments::StaffAssessmentsController < ApplicationController
             params[:subject_id], params[:form], @term.id)
 
         @student_subjects.each do |student|
-         puts @assessment_type.id
+
           Assessment.create(student_id:student.student_id,term_id: @term.id,subject_id:params[:subject_id],
             form_id:params[:form], assessment_type_id: @assessment_type.id, staff_id: current_staff.id)
         end
-
+        redirect_back_or_to root_path,  notice: "Action completed successifully"
       else
         redirect_back_or_to root_path,  alert: "You do not have enough permissions"
       end
@@ -59,9 +60,7 @@ class Assessments::StaffAssessmentsController < ApplicationController
         form_id: params[:form],term_id: params[:term],assessment_type_id: params[:assessment_type])
 
       if !@student_assessment.nil?
-        puts |params[:active_tab].nil  ? "a" : "b"
-        puts  "11"
-        puts  "22"
+
         assessment_grade = nil
         for grade in AssessmentGrade.all
           if Array(grade.start_mark.to_i..grade.end_mark.to_i).include?(params[:score].to_i)
@@ -73,9 +72,11 @@ class Assessments::StaffAssessmentsController < ApplicationController
           @student_assessment.score = params[:score].to_f
           @student_assessment.assessment_grade_id = assessment_grade
           @student_assessment.save
-          redirect_back_or_to root_path,  notice: 'Operation Successfull'
+
+          redirect_to  subject_assign_scores_to_student_path(subject_id:params[:subject_id] , form:params[:form],
+            assessment_name: params[:assessment_name]) ,  notice:'Operation Successfull'
         else
-          redirect_back_or_to root_path,  alert: 'Please Enter a valid Score'
+          redirect_back_or_to root_path ,alert: 'Please Enter a valid Score'
         end
       end
     else
@@ -84,5 +85,20 @@ class Assessments::StaffAssessmentsController < ApplicationController
     end
   end
 
+  def submit_assessment
+    @assessment.submitted = true
+    @assessment.save
+    redirect_back_or_to root_path ,notice: 'Action completed succefully'
 
+  end
+
+  def destroy
+    @assessment.destroy
+    redirect_back_or_to root_path ,notice: 'Action completed succefully'
+  end
+
+  private
+  def find_assessment
+    @assessment = AssessmentType.find(params[:id])
+  end
 end

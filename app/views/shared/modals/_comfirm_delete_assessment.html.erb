@@ -1,0 +1,21 @@
+
+
+<div class="modal" tabindex="-1" id="deleteAssessmentModal<%= assessment %>" aria-labelledby="deleteAssessment" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the selected assessment? This can not be undone...</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= button_to "Comfirm" ,subject_assessment_path(subject,assessment), class: "btn btn-danger",
+            method: :delete %>
+      </div>
+    </div>
+  </div>
+</div>
+

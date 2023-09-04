@@ -5,8 +5,8 @@ class Subjects::StudentSubjectsController < ApplicationController
   def create
 
     term = Term.last
-    puts "okay okay"
-    @student_form =  StudentForm.where(student_id: params[:student_id] , academic_year_id: term.academic_year_id).first
+
+    @student_form =  StudentForm.where(student_id: params[:student_id] , term_id: @term.id).first
     if !@student_form.nil?
       noneEmptySubjects =  params[:subjects].reject { |c| c.empty? } # reject empty elements
       for subject in noneEmptySubjects  do
