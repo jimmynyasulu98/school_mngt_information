@@ -1,0 +1,25 @@
+<%= render 'shared/students_navbar' %>
+
+<div class="container" >
+    <div class="row">
+        <h5 class="mx-3" ><%= "Assessments"  %></h5>
+        <% if !@assessments.blank? %>
+                <% @assessments.each do |assessment| %>
+                   <div class = "row ">
+                        <%= assessment.assessment_type.name %>
+                        <%= assessment.score %>
+                        <%= assessment.assessment_grade.grade %>
+                        <%@assessments_array =  (Assessment.where("subject_id = ? AND form_id = ? AND term_id = ? AND assessment_type_id =?",
+                        assessment.subject_id,assessment.form_id, assessment.term_id, assessment.assessment_type_id
+                        ).order(score: :desc).collect { |u| u.student_id }) %>
+
+                        <%= @assessments_array.find_index(assessment.student_id)+1%>
+                         <%= "out of " + @assessments_array.count.to_s%>
+                    </div>
+                <% end %>
+
+        <% else %>
+            <p class="mx-3"> You do not have assessments</p>
+        <% end %>
+    </div>
+</div>

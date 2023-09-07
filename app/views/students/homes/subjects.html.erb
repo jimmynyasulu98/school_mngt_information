@@ -1,0 +1,22 @@
+<%= render 'shared/students_navbar' %>
+
+<div class="container" >
+    <div class="col d-flex">
+        <h5 class="mx-3" ><%= "Subjects"  %></h5>
+        <% if !@student_subjects.blank? %>
+            <% if  @student_form.registered?  %>
+                <p class="mx-3">You are a registered student</p>
+
+            <% else %>
+                <p class="mx-3">Your subjects pending approval</p>
+            <% end %>
+            <div class = "row">
+                <% @student_subjects.each do |subject| %>
+                    <%= subject.subject.name %>
+                <% end %>
+            </div>
+        <% else %>
+            <p class="mx-3"> You do not have subjects registered for current term</p>
+        <% end %>
+    </div>
+</div>

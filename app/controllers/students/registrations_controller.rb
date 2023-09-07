@@ -27,8 +27,7 @@ class Students::RegistrationsController < ApplicationController
     @subjects = Subject.all
     @student_subjects = StudentSubject.where(student_id: @student.id, term_id: @term.id)
 
-    @student_form =  StudentForm.where(student_id: @student.id , term_id: @term.id).first
-
+    @student_form =  StudentForm.where(student_id: @student.id , term_id: @term.id).first # Current student class
   end
 
   private

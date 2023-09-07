@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_03_190705) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_04_181621) do
   create_table "academic_years", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -192,6 +192,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_03_190705) do
     t.bigint "student_id", null: false
     t.bigint "form_id", null: false
     t.bigint "term_id", null: false
+    t.boolean "registered", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["form_id"], name: "index_student_forms_on_form_id"
