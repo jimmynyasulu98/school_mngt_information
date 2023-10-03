@@ -27,6 +27,11 @@
             <li> <%= link_to "New acadamic Year" , new_academic_year_path,  class: "dropdown-item" %> </li>
             <li> <%= link_to "Add form/class" , register_staff_path ,  class: "dropdown-item" %> </li>
             <li> <%= link_to "New term" , new_term_path ,  class: "dropdown-item" %> </li>
+            <li> <%= link_to "Mandatory Assessments" ,mandatory_assessments_path,  class: "dropdown-item" %> </li>
+
+             <li> <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#newMandatoryAssessmentModal">
+                  Create Mandatory Assessment
+              </button> </li>
             <li> <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addParentTypeModal">
                   Add Guardian type
               </button></li>
@@ -77,3 +82,4 @@
 <!--  Modals -->
 <%= render "shared/modals/guardian_type" %>
 <%= render "shared/modals/new_subject" %>
+<%= render "shared/modals/new_mandatory_assessment" %>

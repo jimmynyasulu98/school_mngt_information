@@ -15,13 +15,13 @@ class Subjects::StudentSubjectsController < ApplicationController
 
           StudentSubject.create(student_id: params[:student_id],subject_id:subject,term_id: @term.id,
             form_id: @student_form.form_id) if Subject.exists?(id: subject) # Assign if subject exist
-            redirect_back_or_to root_path , notice: "Operation is successiful"
 
         else
           redirect_back_or_to root_path , alert: "Student already registered for the specified subject(s)"
           break
         end
       end
+      redirect_back_or_to root_path , notice: "Operation is successiful"
 
     else
 

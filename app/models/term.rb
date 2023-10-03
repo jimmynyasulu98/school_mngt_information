@@ -5,4 +5,5 @@ class Term < ApplicationRecord
   validates :end_date, presence: true
 
   has_many :students, through: :student_forms
+  has_many :assessments
 end
