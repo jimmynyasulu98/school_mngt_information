@@ -51,21 +51,16 @@ class Assessments::StaffAssessmentsController < ApplicationController
         @subject_assessment = SubjectAssessment.create(staff_subject_id: staff_subject.id,assessment_type_id:
           @mandatory_assessment.id)
 
-
         @student_subjects = StudentSubject.where("subject_id = ? AND form_id = ? AND term_id = ?",
                       @subject_assessment.staff_subject.subject_id, @subject_assessment.staff_subject.form_id, @term.id)
-
 
         @student_subjects.each do |student|
           # Add students to assessments
           Assessment.create(student_id:student.student_id,term_id:@term.id,subject_id:@subject_assessment.staff_subject.
             subject_id, form_id:@subject_assessment.staff_subject.form_id, assessment_type_id: @mandatory_assessment.id,
             staff_id: current_staff.id, subject_assessment_id:@subject_assessment.id)
-
         end
-
       end
-
       redirect_back_or_to root_path ,notice: 'Action completed succefully'
     else
       redirect_back_or_to root_path,  alert: @assessment_type.errors.objects.first.full_message
@@ -79,7 +74,6 @@ class Assessments::StaffAssessmentsController < ApplicationController
   end
 
   def assign_scores_to_students
-    @assessment_types = nil
 
     @staff_subject = StaffSubject.find_by("staff_id = ? AND subject_id = ? AND form_id = ? AND term_id = ?",
       current_staff.id,params[:subject_id], params[:form], @term.id)
@@ -98,7 +92,7 @@ class Assessments::StaffAssessmentsController < ApplicationController
       end
 
        @assessments = Assessment.where("subject_id = ? AND form_id = ? AND term_id = ?",
-        params[:subject_id], params[:form], @term.id).order(score: :desc)
+        params[:subject_id], params[:form], @term.id).order(score: :desc) #========= Join with subject_assessment
 
     else
       redirect_back_or_to root_path,  alert: 'You do not have permissions'
@@ -137,24 +131,20 @@ class Assessments::StaffAssessmentsController < ApplicationController
           # student best subjects results excluding crucial
           @best_subjects_excluding_crucial_array = Assessment.where(student_id: params[:student_id] ,form_id:
             params[:form],term_id: params[:term],assessment_type_id: params[:assessment_type]).joins(:subject).where(
-              subject:{crucial: false}).order(score: :desc).limit(6 - @crucial_subjects.count).collect { |u| u.score }
-          @best_subjects_total = (@crucial_subjects.collect {|u| u.score} + @best_subjects_excluding_crucial_array).sum()
-          puts @crucial_subjects.collect { |u| u.score }
-          puts @crucial_subjects.collect { |u| u.assessment_grade.remark}.include? false
-          puts AssessmentGrade.select("end_mark").find_by(remark: false).end_mark
-          puts @best_subjects_excluding_crucial_array
+              subject:{crucial: false}).order(score: :desc).limit(6 - @crucial_subjects.count).collect { |u| if u.score then u.score else 0 end }
+          @best_subjects_total = (@crucial_subjects.collect {|u| if u.score then u.score else 0 end } + @best_subjects_excluding_crucial_array).sum()
 
           @student_finale_result = StudentFinalResult.find_by(student_id:params[:student_id], term_id:@term.id)
           if @student_finale_result.nil? && @student_assessment.subject_assessment.assessment_type.mandatory?
             StudentFinalResult.create(student_id:params[:student_id],term_id: @term.id, form_id:params[:form],
-              total_marks: params[:score].to_f,best_subjects_tota: params[:score].to_f )
+              total_marks: params[:score].to_f,best_subjects_total: params[:score].to_f )
 
           elsif !@student_finale_result.nil? && @student_assessment.subject_assessment.assessment_type.mandatory?
 
             @student_finale_result.total_marks += params[:score].to_f
             @student_finale_result.best_subjects_total = @best_subjects_total
 
-            if !@crucial_subjects.collect{ |u| u.assessment_grade.remark}.include?(false) && @best_subjects_total > AssessmentGrade.select("end_mark").find_by(remark: false).end_mark * 6
+            if !@crucial_subjects.collect{ |u| if u.assessment_grade then u.assessment_grade.remark end}.include?(false) && @best_subjects_total > AssessmentGrade.select("end_mark").find_by(remark: false).end_mark * 6
               @student_finale_result.final_remark = true
             else
               @student_finale_result.final_remark = false
@@ -182,6 +172,7 @@ class Assessments::StaffAssessmentsController < ApplicationController
       subject_assessment.submitted = true
       subject_assessment.save
       redirect_back_or_to root_path ,notice: 'Action completed succefully'
+
     rescue ActiveRecord::RecordNotFound
       redirect_to root_path ,alert: 'Assessment not found'
     end

@@ -1,4 +1,5 @@
 class Generals::TermsController < ApplicationController
+
   def new
     @term = Term.new
     @acadamic_year = AcademicYear.last
@@ -18,5 +19,8 @@ class Generals::TermsController < ApplicationController
   def term_params
     # strong parameters
       params.require(:term).permit(:term_number,:academic_year_id,:start_date, :end_date)
-    end
+  end
+  def current_term
+    @term = Term.last
+  end
 end

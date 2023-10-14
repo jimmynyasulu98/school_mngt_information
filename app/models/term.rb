@@ -6,4 +6,5 @@ class Term < ApplicationRecord
 
   has_many :students, through: :student_forms
   has_many :assessments
+
 end

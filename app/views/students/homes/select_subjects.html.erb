@@ -6,11 +6,10 @@
             <p class=""> <%= current_student.username %></p>
             <% if !@student_form.nil? %>
                 <p class="mx-3"> <%= "Form/Class" %></p>
-                <p class=""> <%= @student_form.form_id %></p>
+                <p class=""> <%= @student_form.form.name %></p>
             <% else %>
                 <p class="mx-3"> <%= "student not active" %></p>
             <% end %>
-
         </div>
         <div class="col d-flex">
             <h5 class="mx-3" ><%= "Subjects"  %></h5>
@@ -18,7 +17,6 @@
             <% if !@student_subjects.blank? %>
                 <% if  @student_form.registered?  %>
                     <p class="mx-3">You are a registered student</p>
-
                 <% else %>
                     <p class="mx-3">Your subjects pending approval</p>
                 <% end %>
@@ -27,6 +25,7 @@
                         <%= subject.subject.name %>
                     <% end %>
                 </div>
+
             <% else %>
                 <p class="mx-3"> You do not have subjects registered for current term</p>
             <% end %>
@@ -51,12 +50,12 @@
             <h3>Add subjects</h3>
             <% if Term.last.registration_open %>
                 <%= form_with url: register_subjects_path do |form| %>
-
                     <div class="col-sm-3 mb-3">
-                        <%= form.label :query, "Subjects:",:class => "px-3" %>
-                        <%= form.collection_select :subjects, @subjects,:id, :name,{}, multiple: true,class: "form-control form-control-sm "%>
-                    </div>
+                        <div class = "container flex">
 
+                             <%= form.collection_check_boxes :subjects, @subjects_hash,:first, :last, class: "form-control form-control-sm "%>
+                        </div>
+                    </div>
                     <%= form.submit "Register", class: "btn btn-primary" %>
                 <% end %>
             <% else %>

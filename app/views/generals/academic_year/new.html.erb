@@ -7,6 +7,12 @@
     <%= form.date_field :start_date %>
     <%= form.date_field :end_date%>
 
+    <%= "Enter Details for term" %>
+    <%= form.fields_for :term do |term| %>
+      <%= term.date_field :start_dates %>
+      <%= term.date_field :end_dates %>
+    <% end %>
+
     <%= form.button :submit  %>
   </div>
 <% end %>

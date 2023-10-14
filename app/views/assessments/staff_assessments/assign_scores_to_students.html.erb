@@ -34,12 +34,13 @@
                             <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#addstudentAssessmentModal<%=assessment.student.id+assessment.id%>">
                                 Add Score
                             </button>
-
                         <% else %>
                             <%= assessment.score %>
                             <%= @assessments.find_index(assessment)+1 %>
-
-                        <% end %>
+                             <button type="button" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#addstudentAssessmentModal<%=assessment.student.id+assessment.id%>">
+                                Edit Score
+                            </button>
+                       <% end %>
                         <%= render "shared/modals/new_student_score", assessment: assessment ,assessment_type:
                          subject_assessment.assessment_type, assessment_mandatory:params[:assessment] %>
 

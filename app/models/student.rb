@@ -5,6 +5,7 @@ class Student < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :guardian, through: :student_guardians
+  has_many :student_forms
   has_many :forms, through: :student_forms
   has_many :subjects, through: :student_subjects
   has_many :assessments
