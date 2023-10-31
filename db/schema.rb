@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_13_083648) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_15_144434) do
   create_table "academic_years", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -321,9 +321,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_13_083648) do
     t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "term_name_id", null: false
     t.index ["academic_year_id"], name: "index_terms_on_academic_year_id"
-    t.index ["term_name_id"], name: "index_terms_on_term_name_id"
   end
 
   add_foreign_key "assessment_types", "staffs"

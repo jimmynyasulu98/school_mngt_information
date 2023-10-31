@@ -1,10 +1,22 @@
-<%= render 'shared/navbar' %>
-<%= "Your Subjects for term " + @term.term_number.to_s + " of " + @term.academic_year.name + " Acadamic year" %>
 
-<div class="container-fluid" >
-    <% @subjects.each do |subject| %>
-        <%= subject.subject.name  %> <%= "form " +subject.form.name  %><%= "\t\tStudents enrolled"%>
-        <%= link_to "\t\tAssessments", subject_assign_scores_to_student_path(subject_id:subject.subject.id , form:subject.form.id ) %>
+<%= render "shared/staff/side_nav" %>
+<div class="wrapper d-flex flex-column min-vh-100 bg-light">
+    <%= render "shared/staff/header" %>
+    <%= render "shared/alerts" %>
+    <div class="body flex-grow-1 px-3">
+         <%= "Your Subjects for term " + @term.term_number.to_s + " of " + @term.academic_year.name + " Acadamic year" %>
 
-    <% end %>
+        <div class="container-fluid" >
+            <% @subjects.each do |subject| %>
+                <%= subject.subject.name  %> <%= "form " + subject.form.name.to_s  %><%= "\t\tStudents enrolled"%>
+                <%= link_to "\t\tAssessments", subject_assign_scores_to_student_path(subject_id:subject.subject.id , form:subject.form.id ) %>
+
+            <% end %>
+        </div>
+    </div>
+    <%= render "shared/staff/footer" %>
 </div>
+<!--  Modals -->
+<%= render "shared/modals/guardian_type" %>
+<%= render "shared/modals/new_subject" %>
+<%= render "shared/modals/new_mandatory_assessment" %>

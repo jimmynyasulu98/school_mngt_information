@@ -2,6 +2,8 @@
 Rails.application.routes.draw do
 
   resources :subject, path: "subjects/new-subject" ,only: [:create ,:edit,:destroy],controller: "subjects/subjects"
+  get '/subjects/subjects/add-subjects-to-class', to: 'subjects/subjects#add_subject_to_class', as: "add_subject_to_class"
+  post '/subjects/subjects/add-subjects-to-class', to: 'subjects/subjects#create_class_subject', as: "create_subject_class"
 
   resources :staffs do
     resources :subjects, only: [:index, :new,:create, :show], controller: "subjects/staff_subjects"

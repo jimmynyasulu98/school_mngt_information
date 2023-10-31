@@ -1,18 +1,31 @@
-<%= render 'shared/navbar' %>
 
-<%= form_with model: @academic_year, url: academic_year_index_path do |form| %>
-  <div class= "container d-flex">
-    <%= form.text_field :name %>
 
-    <%= form.date_field :start_date %>
-    <%= form.date_field :end_date%>
 
-    <%= "Enter Details for term" %>
-    <%= form.fields_for :term do |term| %>
-      <%= term.date_field :start_dates %>
-      <%= term.date_field :end_dates %>
-    <% end %>
+<%= render "shared/staff/side_nav" %>
+<div class="wrapper d-flex flex-column min-vh-100 bg-light">
+    <%= render "shared/staff/header" %>
+    <%= render "shared/alerts" %>
+    <div class="body flex-grow-1 px-3">
+      <%= form_with model: @academic_year, url: academic_year_index_path do |form| %>
+        <div class= "container d-flex">
+          <%= form.text_field :name %>
 
-    <%= form.button :submit  %>
-  </div>
-<% end %>
+          <%= form.date_field :start_date %>
+          <%= form.date_field :end_date%>
+
+          <%= "Enter Details for term" %>
+          <%= form.fields_for :term do |term| %>
+            <%= term.date_field :start_date %>
+            <%= term.date_field :end_date %>
+          <% end %>
+
+          <%= form.button :submit  %>
+        </div>
+      <% end %>
+    </div>
+    <%= render "shared/staff/footer" %>
+</div>
+<!--  Modals -->
+<%= render "shared/modals/guardian_type" %>
+<%= render "shared/modals/new_subject" %>
+<%= render "shared/modals/new_mandatory_assessment" %>

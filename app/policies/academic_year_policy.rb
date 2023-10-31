@@ -12,5 +12,4 @@ class AcademicYearPolicy < ApplicationPolicy
   end
 
 
-
 end

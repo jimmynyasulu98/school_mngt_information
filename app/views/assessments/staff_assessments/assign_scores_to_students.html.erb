@@ -1,6 +1,6 @@
 <%= render 'shared/navbar' %>
+<%= render 'shared/alerts' %>
 <%= "Add Assessments for term " %>
-
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAssessmentModal">Add Assessment</button>
 
@@ -19,10 +19,11 @@
             <div <% if subject_assessment.assessment_type.name  ==  params[:assessment_name]  %>class="tab-pane fade show active"  <%else%>
             class="tab-pane fade" <%end%> id="<%=subject_assessment.assessment_type.name.delete(' ')%>" role="tabpanel">
                 <h3><%= "Add marks to students" %></h3><h3><%= subject_assessment.assessment_type.name %></h3>
-
-                <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#deleteAssessmentModal<%=subject_assessment.assessment_type.id%>">
-                                Delete Assessment
-                </button>
+                <% if !subject_assessment.assessment_type.mandatory? %>
+                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#deleteAssessmentModal<%=subject_assessment.assessment_type.id%>">
+                                    Delete Assessment
+                    </button>
+                <% end %>
                 <% if !subject_assessment.submitted? %>
                     <%= button_to  "Submit assessment" ,subject_submit_assessment_path(params[:subject_id],subject_assessment.id,form:params[:form] ), class: "btn btn-info" %>
                 <% end %>
@@ -36,7 +37,7 @@
                             </button>
                         <% else %>
                             <%= assessment.score %>
-                            <%= @assessments.find_index(assessment)+1 %>
+                            <%= @assessments.find_index(assessment) + 1 %>
                              <button type="button" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#addstudentAssessmentModal<%=assessment.student.id+assessment.id%>">
                                 Edit Score
                             </button>

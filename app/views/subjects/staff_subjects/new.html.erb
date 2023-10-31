@@ -1,28 +1,42 @@
 <%=  render "shared/navbar" %>
 
-Assign subject to <%= @staff.first_name %> (<%= @staff.username %>) for term <%= @term.term_number %> of <%= @term.academic_year.name%>
 
 
-<div class="container"  >
-  <%= form_with model: @staff_subject , url: staff_subjects_path do |form| %>
-    <div class="row">
+<%= render "shared/staff/side_nav" %>
+<div class="wrapper d-flex flex-column min-vh-100 bg-light">
+    <%= render "shared/staff/header" %>
+    <%= render "shared/alerts" %>
+    <div class="body flex-grow-1 px-3">
+      Assign subject to <%= @staff.first_name %> (<%= @staff.username %>) for term <%= @term.term_number %> of <%= @term.academic_year.name%>
+      <div class="container"  >
+        <%= form_with model: @staff_subject , url: staff_subjects_path do |form| %>
+          <div class="row">
 
-        <%= form.hidden_field :staff_id , value: @staff.id %>
+              <%= form.hidden_field :staff_id , value: @staff.id %>
 
-        <%= form.hidden_field :term_id , value: @term.id%>
+              <%= form.hidden_field :term_id , value: @term.id%>
 
-        <div class="col-sm-3 mb-3 mt-3">
-            <%= form.label :query, "Subject",:class => "px-3" %>
-            <%= form.collection_select :subject_id, Subject.all, :id, :name ,class: "form-control form-control-sm " %>
-        </div>
-        <div class="col-sm-3 mb-3 mt-3">
-            <%= form.label :query, "Form/Class",:class => "px-3" %>
-            <%= form.collection_select :form_id, Form.all, :id, :name ,class: "form-control form-control-sm " %>
-        </div>
+              <div class="col-sm-3 mb-3 mt-3">
+                  <%= form.label :query, "Subject",:class => "px-3" %>
+                  <%= form.collection_select :subject_id, Subject.all, :id, :name ,class: "form-control form-control-sm " %>
+              </div>
+              <div class="col-sm-3 mb-3 mt-3">
+                  <%= form.label :query, "Form/Class",:class => "px-3" %>
+                  <%= form.collection_select :form_id, Form.all, :id, :name ,class: "form-control form-control-sm " %>
+              </div>
+
+          </div>
+          <div class="actions">
+              <%= form.submit "Assign" %>
+          </div>
+        <% end %>
+      </div>
 
     </div>
-     <div class="actions">
-        <%= form.submit "Assign" %>
-    </div>
-  <% end %>
+    <%= render "shared/staff/footer" %>
 </div>
+<!--  Modals -->
+<%= render "shared/modals/guardian_type" %>
+<%= render "shared/modals/new_subject" %>
+<%= render "shared/modals/new_mandatory_assessment" %>
+

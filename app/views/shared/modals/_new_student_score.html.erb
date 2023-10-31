@@ -6,7 +6,7 @@
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <%= form_with  url: subject_student_assessment_score_path do |form| %>
+      <%= form_with  url: if assessment.score then subject_edit_student_score_path else subject_student_assessment_score_path end do |form| %>
 
         <%= form.hidden_field :student_id , value: assessment.student_id %>
         <%= form.hidden_field :term, value: assessment.term_id %>
@@ -19,11 +19,12 @@
       <div class="modal-body">
 
           <%= form.label :query, "Total Marks:" %>
-          <%= form.number_field :score ,class: "form-control form-control-sm", :required => true %>
+          <%= form.number_field :score ,value: if assessment.score then assessment.score end ,class: "form-control form-control-sm", :required => true %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-           <%= form.submit "Add", class: "btn btn-primary" %>
+
+           <%= form.submit  "Add" , class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>

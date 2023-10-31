@@ -1,0 +1,26 @@
+<%= render "shared/staff/side_nav" %>
+<div class="wrapper d-flex flex-column min-vh-100 bg-light">
+    <%= render "shared/staff/header" %>
+    <%= render "shared/alerts" %>
+    <div class="body flex-grow-1 px-3">
+         <%= form_with url: create_subject_class_path do |form| %>
+                <div class = "col-sm-3" >
+                    <%= "Select class" %>
+                    <%= form.collection_select :form, Form.all,:id, :name, class: "form-control form-control-sm mx-3"%>
+                </div>
+               <div class = "container mt-4" >
+                    <%= form.collection_check_boxes(:subjects, @subjects, :id, :name) do |subject| %>
+                        <%= subject.label class:"px-4 py-2" do %>
+                        <%= subject.check_box + subject.text%>
+                        <%end%>
+                    <% end %>
+                </div>
+            <%= form.submit "Add", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+    <%= render "shared/staff/footer" %>
+</div>
+<!--  Modals -->
+<%= render "shared/modals/guardian_type" %>
+<%= render "shared/modals/new_subject" %>
+<%= render "shared/modals/new_mandatory_assessment" %>

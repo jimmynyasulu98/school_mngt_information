@@ -2,7 +2,7 @@ class Assessments::StaffAssessmentsController < ApplicationController
   before_action :authenticate_staff!
 
   before_action :find_term
-
+  before_action :find_assessment, only: [:destroy]
 
   def create
     @assessment_type =  AssessmentType.new(name:params[:assessment],term_id: @term.id,staff_id: current_staff.id)
@@ -112,12 +112,8 @@ class Assessments::StaffAssessmentsController < ApplicationController
       if !@student_assessment.nil?
 
         assessment_grade = nil
-        for grade in AssessmentGrade.all
-          if Array(grade.start_mark.to_i..grade.end_mark.to_i).include?(params[:score].to_i)
-            assessment_grade = grade.id
-            break
-          end
-        end
+        assessment_grade = get_assessment_grade(params[:score]) # from assessment method
+
         if !assessment_grade.nil?
           @student_assessment.score = params[:score].to_f
           @student_assessment.assessment_grade_id = assessment_grade
@@ -166,6 +162,64 @@ class Assessments::StaffAssessmentsController < ApplicationController
     end
   end
 
+  def edit_student_score
+    @staff_subject = StaffSubject.find_by("staff_id = ? AND subject_id = ? AND form_id = ? AND term_id = ?",
+      current_staff.id,params[:subject_id], params[:form], @term.id)
+
+    if !@staff_subject.nil?
+      @student_assessment = Assessment.find_by(student_id: params[:student_id],subject_id: params[:subject_id],
+        form_id: params[:form],term_id: params[:term],assessment_type_id: params[:assessment_type])
+
+      if !@student_assessment.nil?
+        assessment_grade = nil
+        assessment_grade = get_assessment_grade(params[:score]) # from assessment method
+
+        if !assessment_grade.nil?
+          old_score = @student_assessment.score
+
+          @student_assessment.score = params[:score].to_f
+          @student_assessment.assessment_grade_id = assessment_grade
+          @student_assessment.save
+          # crucial subject results
+          @crucial_subjects =  Assessment.where(student_id: params[:student_id] ,form_id: params[:form],
+            term_id: params[:term],assessment_type_id: params[:assessment_type]).joins(:subject).where(
+              subject: { compulsory: true, crucial: true })
+          # student best subjects results excluding crucial
+          @best_subjects_excluding_crucial_array = Assessment.where(student_id: params[:student_id] ,form_id:
+            params[:form],term_id: params[:term],assessment_type_id: params[:assessment_type]).joins(:subject).where(
+              subject:{crucial: false}).order(score: :desc).limit(6 - @crucial_subjects.count).collect { |u| if u.score then u.score else 0 end }
+          @best_subjects_total = (@crucial_subjects.collect {|u| if u.score then u.score else 0 end } + @best_subjects_excluding_crucial_array).sum()
+
+          @student_finale_result = StudentFinalResult.find_by(student_id:params[:student_id], term_id:@term.id)
+
+          if  @student_assessment.subject_assessment.assessment_type.mandatory?
+
+            @student_finale_result.total_marks += params[:score].to_f - old_score
+            @student_finale_result.best_subjects_total = @best_subjects_total
+            if !@crucial_subjects.collect{ |u| if u.assessment_grade then u.assessment_grade.remark end}.include?(false) && @best_subjects_total > AssessmentGrade.select("end_mark").find_by(remark: false).end_mark * 6
+              @student_finale_result.final_remark = true
+            else
+              @student_finale_result.final_remark = false
+            end
+            @student_finale_result.save
+          end
+
+          redirect_to  subject_assign_scores_to_student_path(subject_id:params[:subject_id],assessment: params[:assessment],
+            form:params[:form],assessment_name: params[:assessment_name]) ,  notice:'Operation Successfull'
+        else
+          redirect_back_or_to root_path ,alert: 'Please Enter a valid Score'
+        end
+      else
+        redirect_back_or_to root_path ,alert: 'Invalid details try again'
+      end
+    else
+
+      redirect_back_or_to root_path,  alert: 'You do not have permissions'
+    end
+
+  end
+
+
   def submit_assessment
     begin
       subject_assessment = SubjectAssessment.find(params[:id])
@@ -177,7 +231,6 @@ class Assessments::StaffAssessmentsController < ApplicationController
       redirect_to root_path ,alert: 'Assessment not found'
     end
 
-
   end
 
   def destroy
@@ -188,10 +241,20 @@ class Assessments::StaffAssessmentsController < ApplicationController
   private
   def find_assessment
     @assessment = AssessmentType.find(params[:id])
-
   end
 
   def find_term
     @term = Term.last
   end
+
+  def get_assessment_grade(score)
+
+    for grade in AssessmentGrade.all
+      if Array(grade.start_mark.to_i..grade.end_mark.to_i).include?(score.to_i)
+         return  grade.id
+      end
+    end
+
+  end
+
 end
