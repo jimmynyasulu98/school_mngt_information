@@ -8,8 +8,10 @@ class AcademicYearPolicy < ApplicationPolicy
   end
 
   def new?
-    staff.authorization.staff_auths?
+    staff.authorization.academic_year?
   end
 
-
+  def create?
+    staff.authorization.academic_year?
+  end
 end

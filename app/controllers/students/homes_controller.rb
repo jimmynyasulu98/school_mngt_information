@@ -15,7 +15,6 @@ class Students::HomesController < ApplicationController
   end
 
   def select_subjects
-
     @student_form = StudentForm.where(student_id: current_student.id).joins(:term).where(term: {academic_year_id:current_academic_year.id}).first
     @student_subjects = StudentSubject.where(student_id: current_student.id, term_id: @term.id)
     @subjects = FormSubject.where(form_id: @student_form.form_id )
@@ -72,10 +71,6 @@ class Students::HomesController < ApplicationController
 
   def student_form
     @student_form = StudentForm.find_by(student_id: current_student.id, term_id: current_term.id)
-  end
-
-  def pundit_user
-    current_student
   end
 
 end

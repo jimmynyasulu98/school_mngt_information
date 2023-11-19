@@ -27,6 +27,6 @@ class Staffs::SessionsController < Devise::SessionsController
   private
   def after_sign_in_path_for(resource)
     super(resource)
-    root_path
+    staffs_index_path
   end
 end

@@ -71,6 +71,7 @@ class Assessments::StaffAssessmentsController < ApplicationController
   def mandatory_assessments
     @assessment_types = AssessmentType.where(mandatory: :true, released: :false, term_id: @term.id)
     @subjects = StaffSubject.where("staff_id = ? AND term_id = ?", current_staff.id , @term.id)
+
   end
 
   def assign_scores_to_students

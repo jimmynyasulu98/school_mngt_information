@@ -60,8 +60,4 @@ class Generals::AcademicYearController < ApplicationController
     @term = TermName.order(title: :asc).first.id
   end
 
-  def pundit_user
-    current_staff
-  end
-
 end

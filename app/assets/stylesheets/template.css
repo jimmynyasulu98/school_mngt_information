@@ -100,6 +100,7 @@
   }
 
   body {
+    overflow-x: hidden;
     margin: 0;
     font-family: var(--cui-body-font-family);
     font-size: var(--cui-body-font-size);

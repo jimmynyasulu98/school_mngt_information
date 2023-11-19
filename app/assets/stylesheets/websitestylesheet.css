@@ -1,0 +1,138 @@
+body{
+    margin:0;
+    padding: 0;
+   font-family: 'Poppins', sans-serif;;
+}
+.navbar{
+    font-weight: 600;
+    letter-spacing: .1rem;
+    height: 80px;
+    z-index: 1;
+}
+.navbar-brand{
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+}
+.material-icons-outlined{
+
+  font-variation-settings: Fill 0,Weight 400,Grade 0,Optical Size 48
+}
+
+.navbar-logo-image{
+    margin-top: 10px;
+    width: 100px;
+    border-radius: 240px;
+    border: #0c0c0c;
+    border-width: 10px;
+}
+
+.sys-engines-image{
+    width:100%;
+}
+.logo-text{
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight:900;
+    color: rgb(71, 23, 116);
+
+}
+
+.top-bar {
+    background-color: #179bd7;
+    height: 2.8rem;
+    padding: .5rem 0;
+    width: 100%;
+}
+.top-bar a {
+    color: white;
+    text-decoration: none;
+
+}
+
+.nav-item {
+    color: #5b5555!important ;
+    padding: 20px 10px;
+    font-size:medium;
+}
+
+.nav-item.active, .nav-item:hover {
+    background-color: #4981b3!important ; ;
+    transition-delay: 0.2s;
+}
+
+
+.c-image {
+height: 100%;
+object-fit:cover;
+filter: brightness(1.0);
+}
+
+.dropdown:hover .dropdown-menu{
+    display: block;
+}
+
+.dropdown .dropdown-menu {
+    display: none;
+}
+
+
+/* == end of navbar ==*/
+
+
+/* ==  carousel ==*/
+
+
+.carousel-item {
+    height: 450px;
+}
+
+#carouselExampleIndicator{
+
+    box-shadow: 0 1rem 1rem rgb(0,0,.1) ;
+}
+
+.carousel-caption{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-transform: uppercase;
+    font-weight:bold;
+    letter-spacing: 4px;
+
+}
+
+.carousel-content{
+    background: rgb(0,0,.4);
+    color: white;
+    border-radius: 1rem;
+}
+
+.carousel-caption p{
+    font-size: 0.8rem;
+    text-shadow: .1rem .1rem .3rem rgb(0,0,1) ;
+    font-style: italic;
+    text-transform: capitalize!important;
+}
+
+.carousel-caption h2{
+    font-size: 1rem;
+    text-shadow: .1rem .1rem .3rem rgb(0,0,1) ;
+    text-transform: capitalize!important;
+
+}
+
+
+/*==  Main heading */
+
+.main-heading{
+    height: 3px;
+    width: 120px!important;
+    border-radius: 20px;
+}
+
+
+.jumbotron{
+    background: #58abd1;
+}
+

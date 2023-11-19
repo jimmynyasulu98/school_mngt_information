@@ -1,58 +1,74 @@
-<%= render 'shared/navbar' %>
-<%= render 'shared/alerts' %>
 <%= "Add Assessments for term " %>
+<%= render "shared/staff/side_nav" %>
+<div class="wrapper d-flex flex-column min-vh-100 bg-light">
+    <%= render "shared/staff/header" %>
+    <%= render "shared/alerts" %>
+    <div class="body flex-grow-1 px-3">
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAssessmentModal">Add Assessment</button>
-
-<div class="container-fluid" >
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <%   @subject_assessments.each do |subject_assessment| %>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link " id="<%=subject_assessment.assessment_type.name%>-tab" data-bs-toggle="tab"
-                 data-bs-target="#<%=subject_assessment.assessment_type.name.delete(' ')%>" type="button" role="tab" aria-controls="<%=subject_assessment.assessment_type.name%>"
-                 aria-selected="true"><%=subject_assessment.assessment_type.name%></button>
-            </li>
-        <% end %>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-        <% @subject_assessments.each do |subject_assessment| %>
-            <div <% if subject_assessment.assessment_type.name  ==  params[:assessment_name]  %>class="tab-pane fade show active"  <%else%>
-            class="tab-pane fade" <%end%> id="<%=subject_assessment.assessment_type.name.delete(' ')%>" role="tabpanel">
-                <h3><%= "Add marks to students" %></h3><h3><%= subject_assessment.assessment_type.name %></h3>
-                <% if !subject_assessment.assessment_type.mandatory? %>
-                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#deleteAssessmentModal<%=subject_assessment.assessment_type.id%>">
-                                    Delete Assessment
-                    </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAssessmentModal">
+            Add Assessment</button>
+        <div class="container-fluid" >
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <%   @subject_assessments.each do |subject_assessment| %>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link " id="<%=subject_assessment.assessment_type.name%>-tab" data-bs-toggle="tab"
+                        data-bs-target="#<%=subject_assessment.assessment_type.name.delete(' ')%>" type="button"
+                        role="tab" aria-controls="<%=subject_assessment.assessment_type.name%>"
+                        aria-selected="true"><%=subject_assessment.assessment_type.name%></button>
+                    </li>
                 <% end %>
-                <% if !subject_assessment.submitted? %>
-                    <%= button_to  "Submit assessment" ,subject_submit_assessment_path(params[:subject_id],subject_assessment.id,form:params[:form] ), class: "btn btn-info" %>
-                <% end %>
-                <%= render "shared/modals/comfirm_delete_assessment", subject: params[:subject_id], assessment: subject_assessment.assessment_type.id %>
-                <div class="col-md-12">
-                    <% @assessments.where(subject_assessment_id:subject_assessment.id).each do |assessment| %>
-                        <%= assessment.student.username  %>
-                        <% if assessment.score.nil? %>
-                            <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#addstudentAssessmentModal<%=assessment.student.id+assessment.id%>">
-                                Add Score
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <% @subject_assessments.each do |subject_assessment| %>
+                    <div <% if subject_assessment.assessment_type.name  ==  params[:assessment_name]  %>
+                    class="tab-pane fade show active"  <%else%>
+                    class="tab-pane fade" <%end%> id="<%=subject_assessment.assessment_type.name.delete(' ')%>"
+                    role="tabpanel">
+                        <h3><%= "Add marks to students" %></h3><h3><%= subject_assessment.assessment_type.name %></h3>
+                        <% if !subject_assessment.assessment_type.mandatory? %>
+                            <button type="button" class="btn btn-primary"  data-bs-toggle="modal"
+                            data-bs-target="#deleteAssessmentModal<%=subject_assessment.assessment_type.id%>">
+                                            Delete Assessment
                             </button>
-                        <% else %>
-                            <%= assessment.score %>
-                            <%= @assessments.find_index(assessment) + 1 %>
-                             <button type="button" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#addstudentAssessmentModal<%=assessment.student.id+assessment.id%>">
-                                Edit Score
-                            </button>
-                       <% end %>
-                        <%= render "shared/modals/new_student_score", assessment: assessment ,assessment_type:
-                         subject_assessment.assessment_type, assessment_mandatory:params[:assessment] %>
+                        <% end %>
+                        <% if !subject_assessment.submitted? %>
+                            <%= button_to  "Submit assessment" ,subject_submit_assessment_path(params[:subject_id],
+                            subject_assessment.id,form:params[:form] ), class: "btn btn-info" %>
+                        <% end %>
+                        <%= render "shared/modals/comfirm_delete_assessment", subject: params[:subject_id],
+                         assessment: subject_assessment.assessment_type.id %>
+                        <div class="col-md-12">
+                            <% @assessments.where(subject_assessment_id:subject_assessment.id).each do |assessment| %>
+                                <%= assessment.student.username  %>
+                                <% if assessment.score.nil? %>
+                                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal"
+                                    data-bs-target="#addstudentAssessmentModal<%=assessment.student.id+assessment.id%>">
+                                        Add Score
+                                    </button>
+                                <% else %>
+                                    <%= assessment.score %>
+                                    <%= @assessments.find_index(assessment) + 1 %>
+                                    <button type="button" class="btn btn-warning"  data-bs-toggle="modal"
+                                     data-bs-target="#addstudentAssessmentModal<%=assessment.student.id+assessment.id%>">
+                                        Edit Score
+                                    </button>
+                            <% end %>
+                                <%= render "shared/modals/new_student_score", assessment: assessment ,assessment_type:
+                                subject_assessment.assessment_type, assessment_mandatory:params[:assessment] %>
 
-                    <% end %>
-                </div>
+                            <% end %>
+                        </div>
+                    </div>
+
+                <%end%>
             </div>
+        </div>
 
-        <%end%>
     </div>
+    <%= render "shared/staff/footer" %>
 </div>
-
- <%= render "shared/modals/new_assessment", form_id: params[:form] %>
-
-
+<!--  Modals -->
+<%= render "shared/modals/guardian_type" %>
+<%= render "shared/modals/new_subject" %>
+<%= render "shared/modals/new_mandatory_assessment" %>
+<%= render "shared/modals/new_assessment", form_id: params[:form] %>

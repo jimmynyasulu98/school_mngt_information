@@ -1,19 +1,31 @@
-<%= render 'shared/navbar' %>
 
-<div class="container-fluid" >
-<%= " You have the following unsettled mandatory assessments" %>
+ <%= render "shared/staff/side_nav" %>
+<div class="wrapper d-flex flex-column min-vh-100 bg-light">
+    <%= render "shared/staff/header" %>
+    <%= render "shared/alerts" %>
+    <div class="body flex-grow-1 px-3">
+
+        <%= " You have the following unsettled mandatory assessments" %>
         <% @assessment_types.each do |assessment_type| %>
                 <%= assessment_type.name %>
         <% end %>
 
-<%= " select subject to add assessment" %>
-    <div class="row" >
-        <% @subjects.each do |subject| %>
-            <%= subject.subject.name  %> <%= "form " + subject.form.name.to_s  %><%= "\t\tStudents enrolled"%>
-            <%= link_to "\t\tAssessments", subject_assign_scores_to_student_path(subject_id:subject.subject.id , form:subject.form.id,assessment: 'mandatory') %>
-
-        <% end %>
+        <%= " select subject to add assessment" %>
+        <div class="container d-flex px-3" >
+            <% @subjects.each do |subject| %>
+                <div class="row d-flex">
+                    <%= subject.subject.name  %> <%= "form " + subject.form.name.to_s  %>
+                    <%= link_to "\t\tAssessments", subject_assign_scores_to_student_path(subject_id:subject.subject.id ,
+                    form:subject.form.id,assessment: 'mandatory') %>
+                </div>
+            <% end %>
+        </div>
     </div>
- </div>
+    <%= render "shared/staff/footer" %>
+</div>
+<!--  Modals -->
+<%= render "shared/modals/guardian_type" %>
+<%= render "shared/modals/new_subject" %>
+<%= render "shared/modals/new_mandatory_assessment" %>
 
 
