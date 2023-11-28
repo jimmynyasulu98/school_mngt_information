@@ -80,4 +80,6 @@ gem 'jquery-ui-rails', '~> 6.0'
 
 gem 'jquery-datatables-rails' , github: 'rweng/jquery-datatables-rails'
 gem "font-awesome-rails"
+gem 'wicked_pdf'
+
 

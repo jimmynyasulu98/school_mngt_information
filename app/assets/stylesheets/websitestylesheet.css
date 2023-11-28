@@ -50,13 +50,13 @@ body{
 
 }
 
-.nav-item {
+.main-web-nav-item {
     color: #5b5555!important ;
     padding: 20px 10px;
     font-size:medium;
 }
 
-.nav-item.active, .nav-item:hover {
+.main-web-nav-item.active, .main-web-nav-item:hover {
     background-color: #4981b3!important ; ;
     transition-delay: 0.2s;
 }

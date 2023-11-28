@@ -8,62 +8,79 @@
     </svg>
     </div>
     <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
-    <li class="nav-item"><a class="nav-link" href="index.html">
-        <svg class="nav-icon">
-            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
-        </svg> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html">
+             <a class="nav-link" href="#"><i class="fa fa-home nav-icon"></i>Dashboard</a>
 
-    <li class="nav-group">
-        <a class="nav-link nav-group-toggle" href="#">
-        <svg class="nav-icon"> </svg>
-        Registrations</a>
-        <ul class="nav-group-items">
-            <li  class="nav-item"> <%= link_to "Register staff " , register_staff_path , class: "nav-link" %></li>
-            <li class="nav-item"> <%= link_to "Register Student" , register_student_path , class: "nav-link" %> </li>
-            <li class="nav-item" > <%= link_to "Add Student Guardian " ,register_staff_path ,class: "nav-link" %></li>
-        </ul>
-    </li>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-users nav-icon"></i>Staff-Manager</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-users nav-icon"></i>Student-Manager</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-list nav-icon"></i>Examination</a>
+        </li>
 
-    <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
-        <svg class="nav-icon">
-            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cursor"></use>
-        </svg> Buttons</a>
-        <ul class="nav-group-items">
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-calendar nav-icon"></i>Calender & Terms</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-gears nav-icon"></i>Password-Manager</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-envelope nav-icon"></i>Mails</a>
+        </li>
 
-        <% if policy(:academic_year).new? %>
-                <li class="nav-item" > <%= link_to "New acadamic Year" , new_academic_year_path,  class: "nav-link" %> </li>
-        <% end %>
+        <li class="nav-group">
+            <a class="nav-link nav-group-toggle" href="#">
+            Registrations</a>
+            <ul class="nav-group-items">
+                <li  class="nav-item"> <%= link_to "Register staff " , register_staff_path , class: "nav-link" %></li>
+                <li class="nav-item"> <%= link_to "Register Student" , register_student_path , class: "nav-link" %> </li>
+                <li class="nav-item" > <%= link_to "Add Student Guardian " ,register_staff_path ,class: "nav-link" %></li>
+            </ul>
+        </li>
+        <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon">
+                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cursor"></use>
+            </svg> Buttons</a>
+            <ul class="nav-group-items">
 
-        <li class="nav-item" > <%= link_to "Add form/class" , register_staff_path ,  class: "nav-link" %> </li>
-        <li class="nav-item" > <%= link_to "New term" , new_term_path ,  class: "nav-link" %> </li>
-        <li class="nav-item" > <%= link_to "Add subject to class" , add_subject_to_class_path ,class: "nav-link" %></li>
-        <li class="nav-item"> <%= link_to "Mandatory Assessments" ,mandatory_assessments_path,  class: "nav-link" %> </li>
+            <% if  policy(:academic_year).new?  %>
+                    <li class="nav-item" > <%= link_to "New acadamic Year" , new_academic_year_path,  class: "nav-link" %> </li>
+            <% end %>
 
-            <li class="nav-item"> <button type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#newMandatoryAssessmentModal">
-                Create Mandatory Assessment
-            </button> </li>
-        <li class="nav-item"> <button type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#addParentTypeModal">
-                Add Guardian type
-            </button></li>
-        <li class="nav-item"> <button type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#addSubjectModal">
-                Add Subject
-            </button> </li>
-        <li class="nav-item"> <%= link_to "Assign Subject to staff" , staff_members_path ,  class: "nav-link" %> </li>
-        <li class="nav-item"> <%= link_to "Add Subjects" , register_staff_path ,  class: "nav-link" %> </li>
-        </ul>
-    </li>
+            <li class="nav-item" > <%= link_to "Add form/class" , register_staff_path ,  class: "nav-link" %> </li>
+            <li class="nav-item" > <%= link_to "New term" , new_term_path ,  class: "nav-link" %> </li>
+            <li class="nav-item" > <%= link_to "Add subject to class" , add_subject_to_class_path ,class: "nav-link" %></li>
+            <li class="nav-item"> <%= link_to "Mandatory Assessments" ,mandatory_assessments_path,  class: "nav-link" %> </li>
 
-    <li class="nav-item mt-auto"><a class="nav-link" href="https://coreui.io/docs/templates/installation/" target="_blank">
-        <svg class="nav-icon">
-            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-description"></use>
-        </svg> Docs</a></li>
-    <li class="nav-item"><a class="nav-link nav-link-danger" href="https://coreui.io/pro/" target="_top">
-        <svg class="nav-icon">
-            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-layers"></use>
-        </svg> Try CoreUI
-        <div class="fw-semibold">PRO</div>
-        </a>
-    </li>
+                <li class="nav-item"> <button type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#newMandatoryAssessmentModal">
+                    Create Mandatory Assessment
+                </button> </li>
+            <li class="nav-item"> <button type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#addParentTypeModal">
+                    Add Guardian type
+                </button></li>
+            <li class="nav-item"> <button type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#addSubjectModal">
+                    Add Subject
+                </button> </li>
+            <li class="nav-item"> <%= link_to "Assign Subject to staff" , staff_members_path ,  class: "nav-link" %> </li>
+            <li class="nav-item"> <%= link_to "Add Subjects" , register_staff_path ,  class: "nav-link" %> </li>
+            </ul>
+        </li>
+
+        <li class="nav-item mt-auto"><a class="nav-link" href="https://coreui.io/docs/templates/installation/" target="_blank">
+            <svg class="nav-icon">
+                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-description"></use>
+            </svg> Docs</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-danger" href="https://coreui.io/pro/" target="_top">
+            <svg class="nav-icon">
+                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-layers"></use>
+            </svg> Try CoreUI
+            <div class="fw-semibold">PRO</div>
+            </a>
+        </li>
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
 </div>

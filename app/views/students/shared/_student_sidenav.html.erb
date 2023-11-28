@@ -1,0 +1,55 @@
+<div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
+    <div class="sidebar-brand d-none d-md-flex">
+    <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
+        <use xlink:href="assets/brand/coreui.svg#full"></use>
+    </svg>
+    <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
+        <use xlink:href="assets/brand/coreui.svg#signet"></use>
+    </svg>
+    </div>
+    <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
+    <li class="nav-item"><a class="nav-link" href="index.html">
+        <svg class="nav-icon">
+            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
+        </svg> Dashboard</a></li>
+
+    <li class="nav-group">
+        <a class="nav-link nav-group-toggle" href="#">
+        <svg class="nav-icon"> </svg>
+        Registrations</a>
+        <ul class="nav-group-items">
+
+            <li> <%= link_to "Exam Results" , student_exam_results_path,  class: "nav-link" %> </li>
+            <li> <%= link_to "Registration" , student_registration_path,  class: "nav-link" %> </li>
+            <li> <%= link_to "My subjects" , student_subjects_path ,  class: "nav-link" %> </li>
+            <li> <%= link_to "Assessments" , student_assessments_path ,  class: "nav-link" %> </li>
+            <li> <%= link_to "Accomodation" , register_staff_path , class: "nav-link" %> </li>
+            <li> <%= link_to "Profile" , register_staff_path ,  class: "nav-link" %> </li>
+            <li> <%= link_to "Resources" , register_staff_path , class: "nav-link" %> </li>
+
+        </ul>
+    </li>
+
+    <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">
+        <svg class="nav-icon">
+            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cursor"></use>
+        </svg> Buttons</a>
+        <ul class="nav-group-items">
+        <li class="nav-item" > <%= link_to "Add form/class" , register_staff_path ,  class: "nav-link" %> </li>
+
+    </li>
+
+    <li class="nav-item mt-auto"><a class="nav-link" href="https://coreui.io/docs/templates/installation/" target="_blank">
+        <svg class="nav-icon">
+            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-description"></use>
+        </svg> Docs</a></li>
+    <li class="nav-item"><a class="nav-link nav-link-danger" href="https://coreui.io/pro/" target="_top">
+        <svg class="nav-icon">
+            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-layers"></use>
+        </svg> Try CoreUI
+        <div class="fw-semibold">PRO</div>
+        </a>
+    </li>
+    </ul>
+    <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
+</div>

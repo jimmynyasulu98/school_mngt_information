@@ -6,8 +6,14 @@ class Generals::AcademicYearController < ApplicationController
   before_action :first_term, only: [:create]
 
   def new
-    @academic_year = AcademicYear.new
-    authorize  @academic_year
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "file",  template: "generals/academic_year/show", formats: [:html], disposition: :inline  # Excluding ".pdf" extension.
+      end
+    end
+    #@academic_year = AcademicYear.new
+    #authorize  @academic_year
   end
 
   def create

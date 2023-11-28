@@ -321,3 +321,23 @@
   white-space: nowrap;
 }
 
+.pdf {
+  background-color: rgb(8, 7, 7);
+  color: aqua;
+  font-size: large;
+}
+ /* end  simplebar.css */
+
+/* start of dashboard */
+.dashboard-card{
+  border-right: rgb(29, 28, 28);
+  box-shadow: rgb(37, 35, 35);
+
+}
+.dashboard-icon{
+
+  border-radius: 500px;
+  background-color: rgba(85, 84, 84, 0.2);
+
+}
+/* end of dashboard */
